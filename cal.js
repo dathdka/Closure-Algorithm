@@ -1,8 +1,15 @@
+import  {timBaoDong}  from "./timBaoDong.js";
+import  {XiGenerate}  from "./XiGenerate.js";
+import  {timTNVaTG} from "./timTNVaTG.js"
+import { timKhoaVaHienThi } from "./timKhoaVaHienThi.js";
 var F = [];
 var VP = [];
 var VT = [];
 var TN = [];
 var TG = [];
+
+// var F = [{L : 'ag', R: 'dh'}, {L: 'c', R: 'b'}, {L: 'b', R: 'ie'}, {L: 'e', R: 'c'}, {L: 'd', R: 'h'}]
+// document.getElementById("properties").value = 'abcdeghi'
 
 document.getElementById("add").addEventListener("click", () => {
   let left = document.getElementById("left");
@@ -18,46 +25,39 @@ document.getElementById("add").addEventListener("click", () => {
   var li = document.createElement("li");
   li.textContent = `${lastItem.L} -> ${lastItem.R}`;
   ul.appendChild(li);
+  // console.log(F)
 });
 
-const timTNVaTG = () => {
-  var propFromInput = document.getElementById("properties").value.split("");
-  for (let item of F) {
-    const vePhai = item.R.split("");
-    const veTrai = item.L.split("");
-    VP = VP.concat(vePhai);
-    VT = VT.concat(veTrai);
-  }
-  TN = propFromInput.filter((el) => !VP.includes(el));
-//   console.log(TN);
-  var tempTG = VP.filter((el) => VT.includes(el));
-  TG = [...new Set(tempTG)];
-//   console.log(TG);
-};
 
-const timBaoDong = (baoDongTN) => {
-  console.log("Tim bao dong");
-  for (let thuocTinh of F) {
-    if (
-      thuocTinh.L.split('').filter((el) => baoDongTN.includes(el)).length === thuocTinh.L.split('').length &&
-      thuocTinh.R.split('').filter((el) => !baoDongTN.includes(el)).length > 0
-    ){
-        baoDongTN = [ ...baoDongTN, ...thuocTinh.R.split('').filter((el) => !baoDongTN.includes(el))] 
-        timBaoDong(baoDongTN)
-    }
-  }
-  return baoDongTN
-};
 
 document.getElementById("calBtn").addEventListener("click", () => {
+  
   if (F.length === 0) {
     var err = document.getElementById("err");
     err.removeAttribute("hidden");
     err.textContent = `vui lòng nhập F `;
   }
-  timTNVaTG();
+  const tNvaTG = timTNVaTG(F, VT, VP, TN, TG);
+  TN = tNvaTG.TN
+  TG = tNvaTG.TG
+  var result = document.getElementById('result')
   if (TG.length > 0) {
+    var tGKhacRong = document.createElement('h3')
+    tGKhacRong.textContent = `Vì tập trung gian không rỗng nên ta xét tập nguồn như sau: `
+    result.appendChild(tGKhacRong)
     var tempTN = TN;
-    console.log(timBaoDong(tempTN));
+    var qCong = document.getElementById("properties").value.split("")
+    const baoDongTN = timBaoDong(tempTN,F);
+    if(qCong.filter(el => !baoDongTN.includes(el)).length === 0 ){
+      let label = document.createElement('h3')
+      label.textContent = `Bao đóng tập nguồn bằng Q+ nên ${TN.join('')} chính là khoá`
+      result.appendChild(label)
+    }else{
+      let label = document.createElement('h3')
+      label.textContent = `Bao đóng tập nguồn không bằng Q+ nên chúng ta sẽ xét từng thuộc tính qua bảng sau: `
+      result.appendChild(label)
+      const Xi = XiGenerate(TG)
+      timKhoaVaHienThi(TN, Xi, F, qCong)
+    }
   }
 });
