@@ -10,7 +10,8 @@ var TG = [];
 
 //test
 // var F = [{L : 'B', R: 'HE'}, {L: 'H', R: 'C'}, {L: 'C', R: 'A'}, {L: 'A', R: 'DG'}, {L: 'I', R: 'B'}, {L: 'D', R:'I'}]
-// document.getElementById("properties").value = 'ABCDEGHI'
+document.getElementById("properties").value = 'ABC'
+var F = [{L: 'A', R: 'B'}, {L: 'C', R: 'A'}]
 
 const addingF = () =>{
   let left = document.getElementById("left");
@@ -64,15 +65,15 @@ document.getElementById("calBtn").addEventListener("click", () => {
   if (TG.length > 0) {
     var tGKhacRong = document.createElement('h3')
     tGKhacRong.className = 'text'
-    tGKhacRong.textContent = `Vì tập trung gian không rỗng nên ta xét tập nguồn như sau: `
+    tGKhacRong.textContent = `Vì tập trung gian không rỗng nên ta xét tập nguồn: `
     result.appendChild(tGKhacRong)
     var tempTN = TN;
     var qCong = document.getElementById("properties").value.toUpperCase().split("")
     const baoDongTN = timBaoDong(tempTN,F);
     if(qCong.filter(el => !baoDongTN.includes(el)).length === 0 ){
       let label = document.createElement('h3')
-      label.className = 'text'
-      label.textContent = `Bao đóng tập nguồn bằng Q+ nên ${TN.join('')} chính là khoá`
+      label.style.color = 'red'
+      label.textContent = `Bao đóng tập nguồn bằng Q+ nên TN = ${TN.join('')} chính là khoá`
       result.appendChild(label)
     }else{
       let label = document.createElement('h3')

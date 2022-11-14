@@ -5,8 +5,9 @@ export function timBaoDong (baoDongTN, F) {
         thuocTinh.R.split('').filter((el) => !baoDongTN.includes(el)).length > 0
       ){
           baoDongTN = [ ...baoDongTN, ...thuocTinh.R.split('').filter((el) => !baoDongTN.includes(el))] 
-          timBaoDong(baoDongTN,F)
+          baoDongTN = timBaoDong(baoDongTN,F)
+          break
+        }
       }
-    }
-    return baoDongTN
+      return baoDongTN
   };
