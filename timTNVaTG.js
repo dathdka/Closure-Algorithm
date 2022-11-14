@@ -1,5 +1,5 @@
 export const timTNVaTG = (F, VT, VP, TN, TG) => {
-    var propFromInput = document.getElementById("properties").value.split("");
+    var propFromInput = document.getElementById("properties").value.toUpperCase().split("");
     for (let item of F) {
       const vePhai = item.R.split("");
       const veTrai = item.L.split("");
