@@ -6,23 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div id="input">
-        Tap thuoc tinh:
+    <div id="input" class="text">
+        <label class="text">Tập thuộc tính:</label> 
         <input type="text" id="properties">
         <p>
-            <input type="text" id="left" placeholder=" Nhap ve trai ">
+            <input type="text" id="left" placeholder="Nhập vế trái ">
             =>
-            <input type="text" id="right" placeholder=" Nhap ve phai ">
+            <input type="text" id="right" placeholder="Nhập vế phải ">
             <input type="button" id="add" value="add">
         </p>
     </div>
-    <div id="display">
+    <div id="display" class="text">
         <h1 id="err" style="color: red;" hidden></h1>
         <ul id="ul"></ul>
-        <input type="button" value="Tinh toan" id="calBtn">
+        <input type="button" value="Tính toán" id="calBtn">
+        <input type="button" value="Reset" id="reset">
     </div>
     <div id="result">
 
@@ -30,9 +32,9 @@
     <table id="table">
         <tr>
             <th>Xi</th>
-            <th>K = TN u X</th>
-            <th>K +</th>
-            <th>SK</th>
+            <th>K= Tập nguồn + Xi</th>
+            <th>Bao đóng tập K</th>
+            <th>Siêu khoá</th>
         </tr>
     </table>
     <div id="key"></div>

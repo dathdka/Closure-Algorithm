@@ -8,13 +8,12 @@ export const timKhoaVaHienThi = (TN, Xi, F, qCong) =>{
         let kCell = document.createElement('td')
         let kCongCell = document.createElement('td')
         let sKCell = document.createElement('td')
+        sKCell.style.color = 'purple'
         let k = [...TN, ...thuocTinh.split('')]
         var baoDongK = timBaoDong(k, F)
-        // console.log(baoDongK)
         xiCell.textContent = thuocTinh
         kCell.textContent = k.join('')
         kCongCell.textContent = baoDongK.join('')
-        // console.log(qCong.filter(el => !baoDongK.includes(el)))
         if(qCong.filter(el => !baoDongK.includes(el)).length === 0){
             sKCell.textContent = k.join('')
             tapKhoa.push(k.join(''))

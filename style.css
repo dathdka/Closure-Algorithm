@@ -1,0 +1,14 @@
+body {
+    background-color: black;
+}
+
+.text {
+    color: aliceblue;
+}
+table, th, td {
+    color: white;
+    padding: 40px;
+    border: 1px solid;
+    text-align: center;
+}
+
