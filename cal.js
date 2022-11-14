@@ -10,8 +10,8 @@ var TG = [];
 
 //test
 // var F = [{L : 'B', R: 'HE'}, {L: 'H', R: 'C'}, {L: 'C', R: 'A'}, {L: 'A', R: 'DG'}, {L: 'I', R: 'B'}, {L: 'D', R:'I'}]
-document.getElementById("properties").value = 'ABC'
-var F = [{L: 'A', R: 'B'}, {L: 'C', R: 'A'}]
+// document.getElementById("properties").value = 'ABC'
+// var F = [{L: 'A', R: 'B'}, {L: 'C', R: 'A'}]
 
 const addingF = () =>{
   let left = document.getElementById("left");
