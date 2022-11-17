@@ -5,7 +5,7 @@ body {
 .text {
     color: aliceblue;
 }
-table, th, td {
+ th, td {
     color: white;
     padding: 40px;
     border: 1px solid;

@@ -1,6 +1,8 @@
-import  {timBaoDong}  from "./timBaoDong.js";
+import  {timBaoDong}  from "../shared/timBaoDong.js";
+import { timTapKhoa } from "./timTapKhoa.js";
 export const timKhoaVaHienThi = (TN, Xi, F, qCong) =>{
     var table = document.getElementById('table')
+    table.removeAttribute('hidden')
     var tapKhoa = []
     for(let thuocTinh of Xi){
         let row = document.createElement('tr')
@@ -16,7 +18,7 @@ export const timKhoaVaHienThi = (TN, Xi, F, qCong) =>{
         kCongCell.textContent = baoDongK.join('')
         if(qCong.filter(el => !baoDongK.includes(el)).length === 0){
             sKCell.textContent = k.join('')
-            tapKhoa.push(k.join(''))
+            tapKhoa.push(k)
         }
         else
             sKCell.textContent = ''
@@ -28,9 +30,13 @@ export const timKhoaVaHienThi = (TN, Xi, F, qCong) =>{
     }
     var ketLuan = document.createElement('h3')
     ketLuan.style.color = 'red'
+    tapKhoa = timTapKhoa(tapKhoa)
     if(tapKhoa.length !== 0){
-        const khoa = tapKhoa.filter(el => el.length === tapKhoa[0].length)
-        ketLuan.innerHTML = `Vậy tập khoá là ${khoa}`
+        tapKhoa = tapKhoa.filter(el => el.length !== 0)
+        var khoa = []
+        for(let item of tapKhoa)
+            khoa.push(item.join(''))
+        ketLuan.innerHTML = `Vậy tập khoá là ${khoa.join(', ')}`
         document.getElementById('key').appendChild(ketLuan)
     }else{
         ketLuan.innerHTML = `Vậy là không có khoá`
