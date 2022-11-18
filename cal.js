@@ -2,74 +2,41 @@ import { timBaoDong } from "./shared/timBaoDong.js";
 import { XiGenerate } from "./timKhoa/XiGenerate.js";
 import { timTNVaTG } from "./timKhoa/timTNVaTG.js";
 import { timKhoaVaHienThi } from "./timKhoa/timKhoaVaHienThi.js";
+import { nhapF } from "./shared/nhapF.js";
+import { tachChuoi } from "./shared/tachChuoi.js";
+import { timFPhay } from "./timPTT/timFPhay.js";
+import { luocVT } from "./timPTT/luocVT.js";
+import { luocPTHDT } from "./timPTT/luocPTHDT.js";
 var F = [];
 var VP = [];
 var VT = [];
 var TN = [];
 var TG = [];
 
+
 //test
-var F = [{L : 'B', R: 'HE'}, {L: 'H', R: 'C'}, {L: 'C', R: 'A'}, {L: 'A', R: 'DG'}, {L: 'I', R: 'B'}, {L: 'D', R:'I'}]
-document.getElementById("properties").value = 'ABCDGHI'
-document.getElementById('btnTimKhoa').addEventListener('click',(e)=>{
-  document.getElementById('timKhoa').removeAttribute('hidden')
-})
-
-document.getElementById('btnTimPTT').addEventListener('click',(e)=>{
-  document.getElementById('timPTT').removeAttribute('hidden')
-})
-
-const tachChuoi = () => {
-  var str = document.getElementById("copy").value.toUpperCase();
-  console.log(str);
-  var newArr = str.split(/[^A-Za-z]/);
-  newArr = newArr.filter((el) => el !== "");
-  var ul = document.getElementById("ul");
-  for (let i = 0; i < newArr.length; i += 2) {
-    var obj = new Object();
-    obj["L"] = newArr[i];
-    obj["R"] = newArr[i + 1];
-    F.push(obj);
-    var li = document.createElement("li");
-    li.textContent = `${newArr[i]} -> ${newArr[i + 1]}`;
-    ul.appendChild(li);
-  }
-  document.getElementById("copy").value = "";
-};
-
-const addingF = () => {
-  let left = document.getElementById("left");
-  let right = document.getElementById("right");
-  let obj = {};
-  obj["L"] = left.value.toUpperCase();
-  obj["R"] = right.value.toUpperCase();
-  F.push(obj);
-  left.value = "";
-  right.value = "";
-  var ul = document.getElementById("ul");
-  var lastItem = F.at(-1);
-  var li = document.createElement("li");
-  li.textContent = `${lastItem.L} -> ${lastItem.R}`;
-  ul.appendChild(li);
-  document.getElementById("left").focus();
-};
+// var F = [{L : 'BE', R: 'HE'}, {L: 'H', R: 'C'}, {L: 'C', R: 'A'}, {L: 'A', R: 'DG'}, {L: 'I', R: 'B'}, {L: 'D', R:'I'}]
+// var F = [{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''}]
+document.getElementById("properties").value = 'ABCDEG'
+var qCong = document
+.getElementById("properties")
+.value.toUpperCase()
+.split("");
 
 document.getElementById("add").addEventListener("click", () => {
     let left = document.getElementById("left");
     let right = document.getElementById("right");
     if (left.value !== "" && right.value !== "") {
-      console.log("Nhập từng thành phần");
-      addingF();
-    } else tachChuoi();
+      F = [...F,...nhapF()];
+    } else F = [...F,...tachChuoi()] ;
 });
 document.getElementsByTagName("body")[0].addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     let left = document.getElementById("left");
     let right = document.getElementById("right");
     if (left.value !== "" && right.value !== "") {
-      console.log("Nhập từng thành phần");
-      addingF();
-    } else tachChuoi();
+      F = [...F,...nhapF()];
+    } else F = [...F,...tachChuoi()] ;
   }
 });
 
@@ -77,11 +44,7 @@ document.getElementById("reset").addEventListener("click", () => {
   location.reload();
 });
 
-document.getElementById("calBtn").addEventListener("click", () => {
-  var qCong = document
-    .getElementById("properties")
-    .value.toUpperCase()
-    .split("");
+const tinhTapKhoa = () => {
   if (F.length === 0) {
     var err = document.getElementById("err");
     err.removeAttribute("hidden");
@@ -132,4 +95,44 @@ document.getElementById("calBtn").addEventListener("click", () => {
       result.appendChild(tGRong);
     }
   }
+}
+
+const tinhPTT = () =>{
+  if (F.length === 0) {
+    var err = document.getElementById("err");
+    err.removeAttribute("hidden");
+    err.textContent = `Vui lòng nhập F `;
+  }else if(qCong.length === 0){
+    var err = document.getElementById("err");
+    err.removeAttribute("hidden");
+    err.textContent = `Vui lòng nhập Q`;
+  }else{
+    var FPhay = timFPhay(F);
+    var b1 = document.getElementById('b1')
+    var h4 = document.createElement('h4')
+    h4.innerHTML = `F\' = `;
+    for(let item of FPhay)
+      h4.innerHTML += `${item.L} -> ${item.R}, `
+    b1.appendChild(h4)
+    FPhay = luocVT(FPhay)
+    var b2 = document.getElementById('b2')
+    var h4 = document.createElement('h4')
+    h4.innerHTML = `F\' sau khi loại bỏ các thuộc tính dư thừa ở vế trái: <br/>F\' = `;
+    for(let item of FPhay)
+      h4.innerHTML += `${item.L} -> ${item.R}, `
+    b2.appendChild(h4)
+    FPhay = luocPTHDT(FPhay)
+    var b3 = document.getElementById('b3')
+    var h4 = document.createElement('h4')
+    h4.innerHTML = `F\' sau khi loại bỏ các phụ thuộc hàm dư thừa: <br/>F\' = `;
+    for(let item of FPhay)
+      h4.innerHTML += `${item.L} -> ${item.R}, `
+    h4.style.color = `red`
+    b3.appendChild(h4)
+  }
+}
+
+document.getElementById("calBtn").addEventListener("click", () => {
+  tinhTapKhoa()
+  tinhPTT()
 });

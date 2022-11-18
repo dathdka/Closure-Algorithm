@@ -27,15 +27,16 @@
             <input type="text" id="copy" placeholder="Tập F ">
             <input type="button" id="add" value="Thêm thuộc tính" class="btn btn-primary">
         </p>
+        <input type="button" value="Tính toán" id="calBtn" class="btn btn-success">
+        <input type="button" value="Reset" id="reset" class="btn btn-danger">
         <div id="display" class="text">
             <h1 id="err" style="color: red;" hidden></h1>
             <ul id="ul"></ul>
         </div>
     </div>
     <div id="timKhoa" hidden>
-        <input type="button" value="Tính toán" id="calBtn" class="btn btn-success">
-        <input type="button" value="Reset" id="reset" class="btn btn-danger">
         <div id="result">
+            Tìm khoá
         </div>
         <table id="table" hidden>
             <tr>
@@ -48,9 +49,14 @@
         <div id="key"></div>
     </div>
     <div id="timPTT" hidden>
-
+        Tìm phủ tối thiểu
+        <div id="b1"></div>
+        <div id ='b2'></div>
+        <div id="b3"></div>
     </div>
+
     <script type="module" src="cal.js"></script>
+    <script src="selectJob.js"></script>
 </body>
 
 </html>
