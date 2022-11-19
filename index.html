@@ -12,53 +12,49 @@
 </head>
 
 <body>
-    <div class="row">
 
-        <div class="col-sm-1"></div>
-        <div>
-            <div>
-                <input type="button" value="Tìm tập khoá" id="btnTimKhoa" class="btn btn-primary">
-                <input type="button" value="Tìm phủ tối thiểu" id="btnTimPTT" class="btn btn-secondary">
-            </div>
-            <div id="input" class="text" style="padding-top: 40px;">
-                <label class="text">Q = </label>
-                <input type="text" id="properties">
-                <p>
-                    <input type="text" id="left" placeholder="Nhập vế trái ">
-                    =>
-                    <input type="text" id="right" placeholder="Nhập vế phải ">
-                    Hoặc copy tập F:
-                    <input type="text" id="copy" placeholder="Tập F ">
-                    <input type="button" id="add" value="Thêm thuộc tính" class="btn btn-primary">
-                </p>
-                <input type="button" value="Tính toán" id="calBtn" class="btn btn-success">
-                <input type="button" value="Reset" id="reset" class="btn btn-danger">
-                <div id="display" class="text">
-                    <h1 id="err" style="color: red;" hidden></h1>
-                    <ul id="ul"></ul>
-                </div>
-            </div>
-            <div id="timKhoa" hidden>
-                <div id="result">
-                    Tìm khoá
-                </div>
-                <table id="table" hidden>
-                    <tr>
-                        <th>Xi</th>
-                        <th>K= Tập nguồn + Xi</th>
-                        <th>Bao đóng tập K</th>
-                        <th>Siêu khoá</th>
-                    </tr>
-                </table>
-                <div id="key"></div>
-            </div>
-            <div id="timPTT" hidden>
-                Tìm phủ tối thiểu
-                <div id="b1"></div>
-                <div id='b2'></div>
-                <div id="b3"></div>
-            </div>
+    <div>
+        <input type="button" value="Tìm tập khoá" id="btnTimKhoa" class="btn btn-primary">
+        <input type="button" value="Tìm phủ tối thiểu" id="btnTimPTT" class="btn btn-secondary">
+    </div>
+    <div id="input" class="text" style="padding-top: 40px;">
+        <label class="text">Q = </label>
+        <input type="text" id="properties">
+        <p>
+            <input type="text" id="left" placeholder="Nhập vế trái ">
+            =>
+            <input type="text" id="right" placeholder="Nhập vế phải ">
+            Hoặc copy tập F:
+            <input type="text" id="copy" placeholder="Tập F ">
+            <input type="button" id="add" value="Thêm thuộc tính" class="btn btn-primary">
+        </p>
+        <input type="button" value="Tính toán" id="calBtn" class="btn btn-success">
+        <input type="button" value="Reset" id="reset" class="btn btn-danger">
+        <div id="display" class="text">
+            <h1 id="err" style="color: red;" hidden></h1>
+            <ul id="ul"></ul>
         </div>
+    </div>
+    <div id="timKhoa" style="display: relative;" hidden>
+        <div id="result">
+            Tìm khoá
+        </div>
+        <table id="table" hidden>
+            <tr>
+                <th>Xi</th>
+                <th>K= Tập nguồn + Xi</th>
+                <th>Bao đóng tập K</th>
+                <th>Siêu khoá</th>
+            </tr>
+        </table>
+        <div id="key"></div>
+    </div>
+    <div id="timPTT" hidden>
+        Tìm phủ tối thiểu
+        <div id="b1"></div>
+        <div id='b2'></div>
+        <div id="b3"></div>
+    </div>
     </div>
 
     <script type="module" src="cal.js"></script>
