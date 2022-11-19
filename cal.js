@@ -12,33 +12,42 @@ var VP = [];
 var VT = [];
 var TN = [];
 var TG = [];
-
-
+var qCong=[]
 //test
 // var F = [{L : 'BE', R: 'HE'}, {L: 'H', R: 'C'}, {L: 'C', R: 'A'}, {L: 'A', R: 'DG'}, {L: 'I', R: 'B'}, {L: 'D', R:'I'}]
 // var F = [{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''}]
-document.getElementById("properties").value = 'ABCDEG'
-var qCong = document
-.getElementById("properties")
-.value.toUpperCase()
-.split("");
+// document.getElementById("properties").value = "ABCDEG";
 
 document.getElementById("add").addEventListener("click", () => {
-    let left = document.getElementById("left");
-    let right = document.getElementById("right");
-    if (left.value !== "" && right.value !== "") {
-      F = [...F,...nhapF()];
-    } else F = [...F,...tachChuoi()] ;
+  let left = document.getElementById("left");
+  let right = document.getElementById("right");
+  if (left.value !== "" && right.value !== "") {
+    F = [...F, ...nhapF()];
+  } else F = [...F, ...tachChuoi()];
 });
 document.getElementsByTagName("body")[0].addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     let left = document.getElementById("left");
     let right = document.getElementById("right");
     if (left.value !== "" && right.value !== "") {
-      F = [...F,...nhapF()];
-    } else F = [...F,...tachChuoi()] ;
+      F = [...F, ...nhapF()];
+    } else F = [...F, ...tachChuoi()];
   }
 });
+
+document.getElementById("calBtn").addEventListener("click", () => {
+  let tempArr = document
+    .getElementById("properties")
+    .value.toUpperCase()
+    .split(/[^A-Za-z]/).filter(el => el !== '');
+  for(let item of tempArr){
+    qCong = [...qCong, ...item.split('')]
+  }
+    console.log(qCong)
+  tinhTapKhoa();
+  tinhPTT();
+});
+
 
 document.getElementById("reset").addEventListener("click", () => {
   location.reload();
@@ -49,12 +58,12 @@ const tinhTapKhoa = () => {
     var err = document.getElementById("err");
     err.removeAttribute("hidden");
     err.textContent = `Vui lòng nhập F `;
-  }else if(qCong.length === 0){
+  } else if (qCong.length === 0) {
     var err = document.getElementById("err");
     err.removeAttribute("hidden");
     err.textContent = `Vui lòng nhập Q`;
-  }else{
-    const tNvaTG = timTNVaTG(F, VT, VP, TN, TG);
+  } else {
+    const tNvaTG = timTNVaTG(F, VT, VP, TN, TG, qCong);
     TN = tNvaTG.TN;
     TG = tNvaTG.TG;
     var result = document.getElementById("result");
@@ -95,44 +104,42 @@ const tinhTapKhoa = () => {
       result.appendChild(tGRong);
     }
   }
-}
+};
 
-const tinhPTT = () =>{
+const tinhPTT = () => {
   if (F.length === 0) {
     var err = document.getElementById("err");
     err.removeAttribute("hidden");
     err.textContent = `Vui lòng nhập F `;
-  }else if(qCong.length === 0){
+  } else if (qCong.length === 0) {
     var err = document.getElementById("err");
     err.removeAttribute("hidden");
     err.textContent = `Vui lòng nhập Q`;
-  }else{
+  } else {
     var FPhay = timFPhay(F);
-    var b1 = document.getElementById('b1')
-    var h4 = document.createElement('h4')
+    var b1 = document.getElementById("b1");
+    var h4 = document.createElement("h4");
     h4.innerHTML = `F\' = `;
-    for(let item of FPhay)
-      h4.innerHTML += `${item.L} -> ${item.R}, `
-    b1.appendChild(h4)
-    FPhay = luocVT(FPhay)
-    var b2 = document.getElementById('b2')
-    var h4 = document.createElement('h4')
+    for (let item of FPhay) h4.innerHTML += `${item.L} -> ${item.R}, `;
+    h4.style.color = `yellow`;
+    h4.innerHTML = h4.innerHTML.slice(0, h4.innerHTML.length -2 )
+    b1.appendChild(h4);
+    FPhay = luocVT(FPhay);
+    var b2 = document.getElementById("b2");
+    var h4 = document.createElement("h4");
     h4.innerHTML = `F\' sau khi loại bỏ các thuộc tính dư thừa ở vế trái: <br/>F\' = `;
-    for(let item of FPhay)
-      h4.innerHTML += `${item.L} -> ${item.R}, `
-    b2.appendChild(h4)
-    FPhay = luocPTHDT(FPhay)
-    var b3 = document.getElementById('b3')
-    var h4 = document.createElement('h4')
+    for (let item of FPhay) h4.innerHTML += `${item.L} -> ${item.R}, `;
+    h4.style.color = `yellow`;
+    h4.innerHTML = h4.innerHTML.slice(0, h4.innerHTML.length -2 )
+    b2.appendChild(h4);
+    FPhay = luocPTHDT(FPhay);
+    var b3 = document.getElementById("b3");
+    var h4 = document.createElement("h4");
     h4.innerHTML = `F\' sau khi loại bỏ các phụ thuộc hàm dư thừa: <br/>F\' = `;
-    for(let item of FPhay)
-      h4.innerHTML += `${item.L} -> ${item.R}, `
-    h4.style.color = `red`
-    b3.appendChild(h4)
+    for (let item of FPhay) h4.innerHTML += `${item.L} -> ${item.R}, `;
+    h4.innerHTML = h4.innerHTML.slice(0, h4.innerHTML.length -2 )
+    h4.style.color = `red`;
+    b3.appendChild(h4);
   }
-}
+};
 
-document.getElementById("calBtn").addEventListener("click", () => {
-  tinhTapKhoa()
-  tinhPTT()
-});

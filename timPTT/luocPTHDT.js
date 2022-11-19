@@ -29,15 +29,15 @@ export const luocPTHDT = (FPhay = []) => {
         var tempArr = [...FPhay]
         tempArr.splice(FPhay.indexOf(luocPTH[i]),1)
         var baoDong = timBDvaLB(luocPTH[i],tempArr)
-        var h3 = document.createElement('h3')
-        h3.innerHTML = `Xét thuộc tính F\' - {${luocPTH[i].L} -> ${luocPTH[i].R}}:<br/>`
+        var h4 = document.createElement('h4')
+        h4.innerHTML = `Xét thuộc tính F\' - {${luocPTH[i].L} -> ${luocPTH[i].R}}:<br/>`
         if(baoDong.isDuplicate){
             FPhay.splice(FPhay.indexOf(luocPTH[i]),1)
-            h3.innerHTML += `${luocPTH[i].L}+ = ${baoDong.baoDong.join('')} => Chứa ${luocPTH[i].R} => Dư thừa`
+            h4.innerHTML += `${luocPTH[i].L}+ = ${baoDong.baoDong.join('')} => Chứa ${luocPTH[i].R} => Dư thừa`
         }else{
-            h3.innerHTML += `${luocPTH[i].L}+ = ${baoDong.baoDong.join('')} => Không chứa ${luocPTH[i].R} => không thừa`
+            h4.innerHTML += `${luocPTH[i].L}+ = ${baoDong.baoDong.join('')} => Không chứa ${luocPTH[i].R} => không thừa`
         }
-        b3.appendChild(h3)
+        b3.appendChild(h4)
     }
     return FPhay;
 }
