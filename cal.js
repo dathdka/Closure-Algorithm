@@ -22,7 +22,7 @@ document.getElementById("add").addEventListener("click", () => {
   let left = document.getElementById("left");
   let right = document.getElementById("right");
   if (left.value !== "" && right.value !== "") {
-    F = [...F, ...nhapF()];
+    F = [...nhapF()];
   } else F = [...F, ...tachChuoi()];
 });
 document.getElementsByTagName("body")[0].addEventListener("keydown", (e) => {
