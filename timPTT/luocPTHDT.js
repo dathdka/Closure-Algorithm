@@ -27,11 +27,15 @@ export const luocPTHDT = (FPhay = []) => {
     var b3 = document.getElementById('b3')
     for(let i =0 ;i< luocPTH.length; i++){
         var tempArr = [...FPhay]
+        //Bỏ PTH hàm đang xét tạm thời ra khỏi arr
         tempArr.splice(FPhay.indexOf(luocPTH[i]),1)
+        //Tìm bao đóng sau khi bỏ
         var baoDong = timBDvaLB(luocPTH[i],tempArr)
         var h4 = document.createElement('h4')
         h4.innerHTML = `Xét thuộc tính F\' - {${luocPTH[i].L} -> ${luocPTH[i].R}}:<br/>`
         if(baoDong.isDuplicate){
+            if( luocPTH.filter(el => luocPTH[i].R.includes(el.R)).length === 2)
+                i+=1;
             FPhay.splice(FPhay.indexOf(luocPTH[i]),1)
             h4.innerHTML += `${luocPTH[i].L}+ = ${baoDong.baoDong.join('')} => Chứa ${luocPTH[i].R} => Dư thừa`
         }else{

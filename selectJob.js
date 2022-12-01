@@ -4,6 +4,7 @@ if(document.getElementById('btnTimKhoa').classList.contains('btn-primary')){
   
   document.getElementById('btnTimKhoa').addEventListener('click',(e)=>{
     document.getElementById('timKhoa').removeAttribute('hidden')
+    document.getElementById('timDC').setAttribute('hidden', '')
     document.getElementById('timPTT').setAttribute('hidden','')
     var btnTimPTT = document.getElementById('btnTimPTT')
     btnTimPTT.classList.remove('btn-primary')
@@ -12,10 +13,14 @@ if(document.getElementById('btnTimKhoa').classList.contains('btn-primary')){
     btnTimKhoa.removeAttribute('hidden')
     btnTimKhoa.classList.remove('btn-secondary')
     btnTimKhoa.classList.add('btn-primary')
+    var btnTimDC = document.getElementById('btnTimDC')
+    btnTimDC.classList.remove('btn-primary')
+    btnTimDC.classList.add('btn-secondary')
   })
   
   document.getElementById('btnTimPTT').addEventListener('click',(e)=>{
     document.getElementById('timKhoa').setAttribute('hidden', '')  
+    document.getElementById('timDC').setAttribute('hidden', '')
     document.getElementById('timPTT').removeAttribute('hidden')
     var btnTimKhoa = document.getElementById('btnTimKhoa')
     btnTimKhoa.classList.remove('btn-primary')
@@ -24,4 +29,22 @@ if(document.getElementById('btnTimKhoa').classList.contains('btn-primary')){
     btnTimPTT.removeAttribute('hidden')
     btnTimPTT.classList.remove('btn-secondary')
     btnTimPTT.classList.add('btn-primary')
+    var btnTimDC = document.getElementById('btnTimDC')
+    btnTimDC.classList.remove('btn-primary')
+    btnTimDC.classList.add('btn-secondary')
+  })
+
+  document.getElementById('btnTimDC').addEventListener('click',(e)=>{
+    document.getElementById('timPTT').setAttribute('hidden', '')
+    document.getElementById('timDC').removeAttribute('hidden')
+    var btnTimKhoa = document.getElementById('btnTimKhoa')
+    btnTimKhoa.classList.remove('btn-primary')
+    btnTimKhoa.classList.add('btn-secondary')
+    var btnTimPTT = document.getElementById('btnTimPTT')
+    btnTimPTT.removeAttribute('hidden')
+    btnTimPTT.classList.remove('btn-primary')
+    btnTimPTT.classList.add('btn-secondary')
+    var btnTimDC = document.getElementById('btnTimDC')
+    btnTimDC.classList.add('btn-primary')
+    btnTimDC.classList.remove('btn-secondary')
   })

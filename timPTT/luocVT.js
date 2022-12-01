@@ -33,6 +33,5 @@ export const luocVT = (FPhay) => {
       FPhayB2.push(item);
     }
   }
-  console.log(count)
   return FPhayB2;
 };

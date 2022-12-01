@@ -30,6 +30,7 @@ export const timKhoaVaHienThi = (TN, Xi, F, qCong) =>{
     }
     var ketLuan = document.createElement('h3')
     ketLuan.style.color = 'red'
+    // console.table(tapKhoa)
     tapKhoa = timTapKhoa(tapKhoa)
     if(tapKhoa.length !== 0){
         tapKhoa = tapKhoa.filter(el => el.length !== 0)
@@ -38,9 +39,9 @@ export const timKhoaVaHienThi = (TN, Xi, F, qCong) =>{
             khoa.push(item.join(''))
         ketLuan.innerHTML = `Vậy tập khoá là ${khoa.join(', ')}`
         document.getElementById('key').appendChild(ketLuan)
+        return khoa;
     }else{
         ketLuan.innerHTML = `Vậy là không có khoá`
         document.getElementById('key').appendChild(ketLuan)
     }
-
 }
