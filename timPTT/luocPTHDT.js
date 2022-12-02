@@ -34,13 +34,13 @@ export const luocPTHDT = (FPhay = []) => {
         var h4 = document.createElement('h4')
         h4.innerHTML = `Xét thuộc tính F\' - {${luocPTH[i].L} -> ${luocPTH[i].R}}:<br/>`
         if(baoDong.isDuplicate){
-            if( luocPTH.filter(el => luocPTH[i].R.includes(el.R)).length === 2)
-                i+=1;
             FPhay.splice(FPhay.indexOf(luocPTH[i]),1)
             h4.innerHTML += `${luocPTH[i].L}+ = ${baoDong.baoDong.join('')} => Chứa ${luocPTH[i].R} => Dư thừa`
+            if( luocPTH.filter(el => luocPTH[i].R.includes(el.R)).length === 2)
+            i+=1;
         }else{
             h4.innerHTML += `${luocPTH[i].L}+ = ${baoDong.baoDong.join('')} => Không chứa ${luocPTH[i].R} => không thừa`
-        }
+        }   
         b3.appendChild(h4)
     }
     return FPhay;

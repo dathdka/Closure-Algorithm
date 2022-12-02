@@ -8,19 +8,19 @@ import { timFPhay } from "./timPTT/timFPhay.js";
 import { luocVT } from "./timPTT/luocVT.js";
 import { luocPTHDT } from "./timPTT/luocPTHDT.js";
 import { chuan2 } from "./timDC/chuan2.js";
+import { chuan3 } from "./timDC/chuan3.js";
 var F = [];
 var VP = [];
 var VT = [];
 var TN = [];
 var TG = [];
 var qCong = [];
-var khongKhoa = [];
 var tapKhoa = [];
 var chuan = 1;
 //test
 // var F = [{L : 'BE', R: 'HE'}, {L: 'H', R: 'C'}, {L: 'C', R: 'A'}, {L: 'A', R: 'DG'}, {L: 'I', R: 'B'}, {L: 'D', R:'I'}]
 // var F = [{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''}]
-// var F = [{L:'AB',R:'C'},{L:'B',R: 'D'},{L:'BC',R:'A'}]
+// var F = [{L:'AB',R:'C'},{L:'B',R: 'D'},{L:'C',R:'ABD'}]
 // document.getElementById("properties").value = "ABCD";
 
 document.getElementById("add").addEventListener("click", () => {
@@ -164,20 +164,31 @@ const tinhDC = () =>{
   h3.innerHTML = `Tập không khoá = {${khongKhoa.join("")}}`
   document.getElementById('chuan1').appendChild(h3)
   const datChuan2 = chuan2(F,khongKhoa,tapKhoa)
-  if(!datChuan2){
+  if(datChuan2){
     var h3 = document.createElement('h3')
-    h3.innerHTML = `Tập không khoá phụ thuộc hàm đầy đủ vào tập khoá nên dữ liệu đạt ít nhất chuẩn 2`
-    document.getElementById('chuan1').appendChild(h3)
-  }else{
-    var h3 = document.createElement('h3')
-    h3.innerHTML = `Tập không khoá ${datChuan2.R} ∈ ${datChuan2.L} -> ${datChuan2.R} không phụ thuộc hàm đầy đủ vào tập khoá nên dữ liệu đạt chuẩn 1`
-    document.getElementById('chuan1').appendChild(h3)
+    h3.style.color = 'yellow'
+    if(! typeof datChuan2.R === 'undefined'){
+      h3.innerHTML = `Tập không khoá ${datChuan2.R} ∈ ${datChuan2.L} -> ${datChuan2.R} không phụ thuộc hàm đầy đủ vào tập khoá nên dữ liệu đạt cao nhất chuẩn 1`
+      document.getElementById('chuan2').appendChild(h3)
+      return
+    }
+    h3.innerHTML = `Tập không khoá còn lại = ${datChuan2} không phụ thuộc hàm đầy đủ vào tập khoá nên dữ liệu đạt cao nhất chuẩn 1`
+    document.getElementById('chuan2').appendChild(h3)
+    return
   }
-
-  // if(khongKhoa.length > 0){
-  // }else{
-  //   var h3 = document.createElement('h3')
-  //   h3.innerHTML = 'Vì tập không khoá rỗng nên dữ liệu đạt chuẩn 3'
-  //   document.getElementById('chuan3').appendChild(h3)
-  // }
+  var h3 = document.createElement('h3')
+  h3.style.color = 'yellow'
+  h3.innerHTML = `Tập không khoá phụ thuộc hàm đầy đủ vào tập khoá nên dữ liệu đạt ít nhất chuẩn 2`
+  document.getElementById('chuan2').appendChild(h3)
+  const datChuan3 = chuan3(F, tapKhoa);
+  if(datChuan3){
+    h3.innerHTML = `Vế trái hoặc vế phải không chứa khoá/thuộc tính khoá nên dữ liệu đạt cao nhất chuẩn 2`
+      document.getElementById('chuan3').appendChild(h3)
+      return
+  }
+  var h3 = document.createElement('h3')
+  h3.style.color = 'yellow'
+  h3.innerHTML = `Vế trái và vế phải đều chứa khoá/thuộc tính khoá nên dữ liệu đạt ít nhất chuẩn 3`
+  document.getElementById('chuan3').appendChild(h3)
+  
 }
