@@ -1,4 +1,4 @@
-export function timBaoDong (baoDongTN = [], F = []) {
+export function timBaoDong (baoDongTN = [], F = [{L: '', R: ''}]) {
     for (let thuocTinh of F) {
       if (
         thuocTinh.L.split('').filter((el) => !baoDongTN.includes(el)).length === 0 &&
