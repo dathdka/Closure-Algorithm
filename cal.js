@@ -7,9 +7,9 @@ import { tachChuoi } from "./shared/tachChuoi.js";
 import { timFPhay } from "./timPTT/timFPhay.js";
 import { luocVT } from "./timPTT/luocVT.js";
 import { luocPTHDT } from "./timPTT/luocPTHDT.js";
-import { chuan2 } from "./timDC/chuan2.js";
-import { chuan3 } from "./timDC/chuan3.js";
-import { chuanBC } from "./timDC/chuanBC.js";
+// import { chuan2 } from "./timDC/chuan2";
+// import { chuan3 } from "./timDC/chuan3.js";
+// import { chuanBC } from "./timDC/chuanBC.js";
 var F = [];
 var VP = [];
 var VT = [];
@@ -17,7 +17,6 @@ var TN = [];
 var TG = [];
 var qCong = [];
 var tapKhoa = [];
-var chuan = 1;
 //test
 // var F = [{L : 'BE', R: 'HE'}, {L: 'H', R: 'C'}, {L: 'C', R: 'A'}, {L: 'A', R: 'DG'}, {L: 'I', R: 'B'}, {L: 'D', R:'I'}]
 // var F = [{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''},{L : '', R: ''}]
@@ -157,42 +156,42 @@ const tinhPTT = () => {
   }
 };
 
-const tinhDC = () => {
-  //Chuẩn 2
-  const tempTK = tapKhoa.join("").split("");
-  var khongKhoa = qCong.filter((el) => !tempTK.includes(el));
-  var h3Chuan1 = document.createElement("h3");
-  h3Chuan1.innerHTML = `Tập không khoá = {${khongKhoa.join("")}}`;
-  document.getElementById("chuan1").appendChild(h3Chuan1);
-  const datChuan2 = chuan2(F, khongKhoa, tapKhoa);
-  var h3Chuan2 = document.createElement("h3");
-  if (datChuan2) {
-    h3Chuan2.style.color = "yellow";
-    h3Chuan2.innerHTML = `Thuộc tính không khoá ${datChuan2.pTKDD} không phụ thuộc đầy đủ vào tập khoá ${datChuan2.tK} do ${datChuan2.xil}+ = ${datChuan2.baoDong} nên dữ liệu không thể đạt chuẩn 2`;
-    document.getElementById("chuan2").appendChild(h3);
-    return;
-  }
-  h3Chuan2.style.color = "yellow";
-  h3Chuan2.innerHTML = `Tập không khoá phụ thuộc hàm đầy đủ vào tập khoá nên dữ liệu đạt ít nhất chuẩn 2`;
-  document.getElementById("chuan2").appendChild(h3Chuan2);
-  const datChuan3 = chuan3(F, tapKhoa);
-  var h3Chuan3 = document.createElement('h3')
-  if (datChuan3) {
-    h3Chuan3.innerHTML = `Vế trái/Vế phải không chứa khoá/thuộc tính khoá nên dữ liệu không thể đạt chuẩn 3`;
-    document.getElementById("chuan3").appendChild(h3Chuan3);
-    return;
-  }
-  h3Chuan3.style.color = "yellow";
-  h3Chuan3.innerHTML = `Vế trái và vế phải đều chứa khoá/thuộc tính khoá nên dữ liệu đạt ít nhất chuẩn 3`;
-  document.getElementById("chuan3").appendChild(h3Chuan3);
+// const tinhDC = () => {
+//   //Chuẩn 2
+//   const tempTK = tapKhoa.join("").split("");
+//   var khongKhoa = qCong.filter((el) => !tempTK.includes(el));
+//   var h3Chuan1 = document.createElement("h3");
+//   h3Chuan1.innerHTML = `Tập không khoá = {${khongKhoa.join("")}}`;
+//   document.getElementById("chuan1").appendChild(h3Chuan1);
+//   const datChuan2 = chuan2(F, khongKhoa, tapKhoa);
+//   var h3Chuan2 = document.createElement("h3");
+//   if (datChuan2) {
+//     h3Chuan2.style.color = "yellow";
+//     h3Chuan2.innerHTML = `Thuộc tính không khoá ${datChuan2.pTKDD} không phụ thuộc đầy đủ vào tập khoá ${datChuan2.tK} do ${datChuan2.xil}+ = ${datChuan2.baoDong} nên dữ liệu không thể đạt chuẩn 2`;
+//     document.getElementById("chuan2").appendChild(h3);
+//     return;
+//   }
+//   h3Chuan2.style.color = "yellow";
+//   h3Chuan2.innerHTML = `Tập không khoá phụ thuộc hàm đầy đủ vào tập khoá nên dữ liệu đạt ít nhất chuẩn 2`;
+//   document.getElementById("chuan2").appendChild(h3Chuan2);
+//   const datChuan3 = chuan3(F, tapKhoa);
+//   var h3Chuan3 = document.createElement('h3')
+//   if (datChuan3) {
+//     h3Chuan3.innerHTML = `Vế trái/Vế phải không chứa khoá/thuộc tính khoá nên dữ liệu không thể đạt chuẩn 3`;
+//     document.getElementById("chuan3").appendChild(h3Chuan3);
+//     return;
+//   }
+//   h3Chuan3.style.color = "yellow";
+//   h3Chuan3.innerHTML = `Vế trái và vế phải đều chứa khoá/thuộc tính khoá nên dữ liệu đạt ít nhất chuẩn 3`;
+//   document.getElementById("chuan3").appendChild(h3Chuan3);
 
-  const datChuanBC = chuanBC(F, tapKhoa);
-  var h3ChuanBC = document.createElement("h3");
-  if (datChuanBC) {
-    h3ChuanBC.innerHTML = `Phụ thuộc hàm ${datChuanBC.L} -> ${datChuanBC.R} có vế trái không chứa khoá nên dữ liệu không thể đạt chuẩn BC`;
-    document.getElementById("chuanBC").appendChild(h3ChuanBC);
-    return;
-  }
-  h3ChuanBC.innerHTML = `Mọi phụ thuộc hàm đều có vế trái chứa khoá nên dữ liệu đạt ít nhất chuẩn BC`;
-  document.getElementById("chuanBC").appendChild(h3ChuanBC);
-};
+//   const datChuanBC = chuanBC(F, tapKhoa);
+//   var h3ChuanBC = document.createElement("h3");
+//   if (datChuanBC) {
+//     h3ChuanBC.innerHTML = `Phụ thuộc hàm ${datChuanBC.L} -> ${datChuanBC.R} có vế trái không chứa khoá nên dữ liệu không thể đạt chuẩn BC`;
+//     document.getElementById("chuanBC").appendChild(h3ChuanBC);
+//     return;
+//   }
+//   h3ChuanBC.innerHTML = `Mọi phụ thuộc hàm đều có vế trái chứa khoá nên dữ liệu đạt ít nhất chuẩn BC`;
+//   document.getElementById("chuanBC").appendChild(h3ChuanBC);
+// };
