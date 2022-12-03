@@ -158,26 +158,38 @@ const tinhPTT = () => {
 
 const tinhDC = () => {
   //Chuẩn 2
+  var h3TK = document.createElement('h3')
+  h3TK.innerHTML = `Tập khoá = { ${tapKhoa} }`
+  document.getElementById("chuan1").appendChild(h3TK);
   const tempTK = tapKhoa.join("").split("");
   var khongKhoa = qCong.filter((el) => !tempTK.includes(el));
   var h3Chuan1 = document.createElement("h3");
   h3Chuan1.innerHTML = `Tập không khoá = {${khongKhoa.join("")}}`;
   document.getElementById("chuan1").appendChild(h3Chuan1);
+
+  
   const datChuan2 = chuan2(F, khongKhoa, tapKhoa);
   var h3Chuan2 = document.createElement("h3");
   if (datChuan2) {
     h3Chuan2.style.color = "yellow";
     h3Chuan2.innerHTML = `Thuộc tính không khoá ${datChuan2.pTKDD} không phụ thuộc đầy đủ vào tập khoá ${datChuan2.tK} do ${datChuan2.xil}+ = ${datChuan2.baoDong} nên dữ liệu không thể đạt chuẩn 2`;
-    document.getElementById("chuan2").appendChild(h3);
+    document.getElementById("chuan2").appendChild(h3Chuan2);
     return;
   }
   h3Chuan2.style.color = "yellow";
   h3Chuan2.innerHTML = `Tập không khoá phụ thuộc hàm đầy đủ vào tập khoá nên dữ liệu đạt ít nhất chuẩn 2`;
   document.getElementById("chuan2").appendChild(h3Chuan2);
+
+
   const datChuan3 = chuan3(F, tapKhoa);
   var h3Chuan3 = document.createElement('h3')
   if (datChuan3) {
-    h3Chuan3.innerHTML = `Vế trái/Vế phải không chứa khoá/thuộc tính khoá nên dữ liệu không thể đạt chuẩn 3`;
+    let result = ''
+    for(let item of datChuan3){
+      result += ` ${item.L} -> ${item.R},`
+    }
+    result = result.slice(0, result.length -1)
+    h3Chuan3.innerHTML = `Các phụ thuộc hàm ${result} có vế Trái/Phải không chứa khoá/Thuộc tính khoá nên dữ liệu không thể đạt chuẩn 3`;
     document.getElementById("chuan3").appendChild(h3Chuan3);
     return;
   }
@@ -185,8 +197,10 @@ const tinhDC = () => {
   h3Chuan3.innerHTML = `Vế trái và vế phải đều chứa khoá/thuộc tính khoá nên dữ liệu đạt ít nhất chuẩn 3`;
   document.getElementById("chuan3").appendChild(h3Chuan3);
 
+
   const datChuanBC = chuanBC(F, tapKhoa);
   var h3ChuanBC = document.createElement("h3");
+  h3ChuanBC.style.color = 'red'
   if (datChuanBC) {
     h3ChuanBC.innerHTML = `Phụ thuộc hàm ${datChuanBC.L} -> ${datChuanBC.R} có vế trái không chứa khoá nên dữ liệu không thể đạt chuẩn BC`;
     document.getElementById("chuanBC").appendChild(h3ChuanBC);
