@@ -1,3 +1,4 @@
+//this is test
 export const chuanBC = (F = [{L:'',R:''}], tapKhoa = ['']) =>{
     for(let i = 0 ;i< F.length; i++){
         let laKhoa = false

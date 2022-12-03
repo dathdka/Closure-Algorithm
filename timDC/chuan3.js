@@ -1,3 +1,4 @@
+//this is test
 export const chuan3 = (F = [{L: '', R: ''}], tapKhoa = ['']) =>{
     let count = 0;
     for(let i = 0 ; i<F.length; i++){

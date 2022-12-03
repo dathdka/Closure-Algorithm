@@ -1,5 +1,6 @@
 import { timBaoDong } from "../shared/timBaoDong.js";
 import { XiGenerate } from "../timKhoa/XiGenerate.js";
+//this is test
 export const chuan2 = (F = [{L: '', R: ''}] , khongKhoa = [''], tapKhoa = ['']) => {
   // for (let i = 0; i < F.length; i++) {
   //   var flag = null;
